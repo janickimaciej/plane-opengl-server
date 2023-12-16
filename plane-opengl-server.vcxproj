@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{3cc94877-8cde-4ba5-87ad-9162b081ae41}</ProjectGuid>
+    <RootNamespace>planeopenglserver</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\OpenGL\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\OpenGL\lib\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\OpenGL\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\OpenGL\lib\release;$(LibraryPath)</LibraryPath>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)\core;$(ProjectDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)\core;$(ProjectDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="core\app\udp\udp_frame_type.cpp" />
+    <ClCompile Include="core\app\udp\udp_serializer.cpp" />
+    <ClCompile Include="core\common\airplane_type_name.cpp" />
+    <ClCompile Include="core\common\state.cpp" />
+    <ClCompile Include="core\common\transformable.cpp" />
+    <ClCompile Include="core\physics\airplane_params\airplane_params.cpp" />
+    <ClCompile Include="core\physics\atmosphere.cpp" />
+    <ClCompile Include="core\physics\day_night_cycle.cpp" />
+    <ClCompile Include="core\physics\flight_ctrl.cpp" />
+    <ClCompile Include="core\physics\models\airplane.cpp" />
+    <ClCompile Include="core\physics\models\model.cpp" />
+    <ClCompile Include="core\physics\model_dynamics\airplane_dynamics.cpp" />
+    <ClCompile Include="core\physics\model_dynamics\rigid_body_dynamics.cpp" />
+    <ClCompile Include="core\physics\notification.cpp" />
+    <ClCompile Include="core\physics\scene.cpp" />
+    <ClCompile Include="core\physics\simulation_buffer.cpp" />
+    <ClCompile Include="core\physics\simulation_clock.cpp" />
+    <ClCompile Include="core\physics\timestamp.cpp" />
+    <ClCompile Include="core\physics\timestep.cpp" />
+    <ClCompile Include="src\app\command_line_argument.cpp" />
+    <ClCompile Include="src\app\exit_code.cpp" />
+    <ClCompile Include="src\app\exit_signal.cpp" />
+    <ClCompile Include="src\app\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\app\udp\frame\control_frame.hpp" />
+    <ClInclude Include="core\app\udp\frame\init_req_frame.hpp" />
+    <ClInclude Include="core\app\udp\frame\init_res_frame.hpp" />
+    <ClInclude Include="core\app\udp\frame\state_frame.hpp" />
+    <ClInclude Include="core\app\udp\frame\state_frame_player_info.hpp" />
+    <ClInclude Include="core\app\udp\udp_frame_type.hpp" />
+    <ClInclude Include="core\app\udp\udp_serializer.hpp" />
+    <ClInclude Include="core\common\airplane_center_of_mass_database.hpp" />
+    <ClInclude Include="core\common\airplane_ctrl.hpp" />
+    <ClInclude Include="core\common\airplane_info.hpp" />
+    <ClInclude Include="core\common\airplane_type_name.hpp" />
+    <ClInclude Include="core\common\state.hpp" />
+    <ClInclude Include="core\common\transformable.hpp" />
+    <ClInclude Include="core\physics\airplane_params\airplane_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params\fuselage_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params\inertia_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params\propulsion_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params\surface_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params_database.hpp" />
+    <ClInclude Include="core\physics\airplane_params_database\mustang.hpp" />
+    <ClInclude Include="core\physics\atmosphere.hpp" />
+    <ClInclude Include="core\physics\day_night_cycle.hpp" />
+    <ClInclude Include="core\physics\flight_ctrl.hpp" />
+    <ClInclude Include="core\physics\models\airplane.hpp" />
+    <ClInclude Include="core\physics\models\model.hpp" />
+    <ClInclude Include="core\physics\model_dynamics\airplane_dynamics.hpp" />
+    <ClInclude Include="core\physics\model_dynamics\rigid_body_dynamics.hpp" />
+    <ClInclude Include="core\physics\notification.hpp" />
+    <ClInclude Include="core\physics\player_info.hpp" />
+    <ClInclude Include="core\physics\player_input.hpp" />
+    <ClInclude Include="core\physics\player_state.hpp" />
+    <ClInclude Include="core\physics\runge_kutta.hpp" />
+    <ClInclude Include="core\physics\runge_kutta_right_hand_side.hpp" />
+    <ClInclude Include="core\physics\scene.hpp" />
+    <ClInclude Include="core\physics\simulation_buffer.hpp" />
+    <ClInclude Include="core\physics\simulation_buffer_element.hpp" />
+    <ClInclude Include="core\physics\simulation_buffer_player.hpp" />
+    <ClInclude Include="core\physics\simulation_clock.hpp" />
+    <ClInclude Include="core\physics\timestamp.hpp" />
+    <ClInclude Include="core\physics\timestep.hpp" />
+    <ClInclude Include="src\app\command_line_argument.hpp" />
+    <ClInclude Include="src\app\exit_code.hpp" />
+    <ClInclude Include="src\app\exit_signal.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include=".gitmodules" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\app\main.cpp" />
+    <ClCompile Include="src\app\command_line_argument.cpp" />
+    <ClCompile Include="src\app\exit_code.cpp" />
+    <ClCompile Include="src\app\exit_signal.cpp" />
+    <ClCompile Include="core\app\udp\udp_frame_type.cpp" />
+    <ClCompile Include="core\app\udp\udp_serializer.cpp" />
+    <ClCompile Include="core\common\airplane_type_name.cpp" />
+    <ClCompile Include="core\common\state.cpp" />
+    <ClCompile Include="core\common\transformable.cpp" />
+    <ClCompile Include="core\physics\airplane_params\airplane_params.cpp" />
+    <ClCompile Include="core\physics\model_dynamics\airplane_dynamics.cpp" />
+    <ClCompile Include="core\physics\model_dynamics\rigid_body_dynamics.cpp" />
+    <ClCompile Include="core\physics\models\airplane.cpp" />
+    <ClCompile Include="core\physics\models\model.cpp" />
+    <ClCompile Include="core\physics\atmosphere.cpp" />
+    <ClCompile Include="core\physics\day_night_cycle.cpp" />
+    <ClCompile Include="core\physics\flight_ctrl.cpp" />
+    <ClCompile Include="core\physics\notification.cpp" />
+    <ClCompile Include="core\physics\scene.cpp" />
+    <ClCompile Include="core\physics\simulation_buffer.cpp" />
+    <ClCompile Include="core\physics\simulation_clock.cpp" />
+    <ClCompile Include="core\physics\timestamp.cpp" />
+    <ClCompile Include="core\physics\timestep.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\app\command_line_argument.hpp" />
+    <ClInclude Include="src\app\exit_code.hpp" />
+    <ClInclude Include="src\app\exit_signal.hpp" />
+    <ClInclude Include="core\app\udp\frame\control_frame.hpp" />
+    <ClInclude Include="core\app\udp\frame\init_req_frame.hpp" />
+    <ClInclude Include="core\app\udp\frame\init_res_frame.hpp" />
+    <ClInclude Include="core\app\udp\frame\state_frame.hpp" />
+    <ClInclude Include="core\app\udp\frame\state_frame_player_info.hpp" />
+    <ClInclude Include="core\app\udp\udp_frame_type.hpp" />
+    <ClInclude Include="core\app\udp\udp_serializer.hpp" />
+    <ClInclude Include="core\common\airplane_center_of_mass_database.hpp" />
+    <ClInclude Include="core\common\airplane_ctrl.hpp" />
+    <ClInclude Include="core\common\airplane_info.hpp" />
+    <ClInclude Include="core\common\airplane_type_name.hpp" />
+    <ClInclude Include="core\common\state.hpp" />
+    <ClInclude Include="core\common\transformable.hpp" />
+    <ClInclude Include="core\physics\airplane_params\airplane_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params\fuselage_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params\inertia_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params\propulsion_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params\surface_params.hpp" />
+    <ClInclude Include="core\physics\airplane_params_database\mustang.hpp" />
+    <ClInclude Include="core\physics\model_dynamics\airplane_dynamics.hpp" />
+    <ClInclude Include="core\physics\model_dynamics\rigid_body_dynamics.hpp" />
+    <ClInclude Include="core\physics\models\airplane.hpp" />
+    <ClInclude Include="core\physics\models\model.hpp" />
+    <ClInclude Include="core\physics\airplane_params_database.hpp" />
+    <ClInclude Include="core\physics\atmosphere.hpp" />
+    <ClInclude Include="core\physics\day_night_cycle.hpp" />
+    <ClInclude Include="core\physics\flight_ctrl.hpp" />
+    <ClInclude Include="core\physics\notification.hpp" />
+    <ClInclude Include="core\physics\player_info.hpp" />
+    <ClInclude Include="core\physics\player_input.hpp" />
+    <ClInclude Include="core\physics\player_state.hpp" />
+    <ClInclude Include="core\physics\runge_kutta.hpp" />
+    <ClInclude Include="core\physics\runge_kutta_right_hand_side.hpp" />
+    <ClInclude Include="core\physics\scene.hpp" />
+    <ClInclude Include="core\physics\simulation_buffer.hpp" />
+    <ClInclude Include="core\physics\simulation_buffer_element.hpp" />
+    <ClInclude Include="core\physics\simulation_buffer_player.hpp" />
+    <ClInclude Include="core\physics\simulation_clock.hpp" />
+    <ClInclude Include="core\physics\timestamp.hpp" />
+    <ClInclude Include="core\physics\timestep.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include=".gitmodules" />
+  </ItemGroup>
+</Project>
