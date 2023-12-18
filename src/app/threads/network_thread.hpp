@@ -1,0 +1,34 @@
+#pragma once
+
+#include "app/exit_signal.hpp"
+#include "app/player_manager.hpp"
+#include "app/udp/udp_communication.hpp"
+#include "physics/notification.hpp"
+#include "physics/simulation_buffer.hpp"
+#include "physics/simulation_clock.hpp"
+
+#include <unordered_map>
+
+namespace App
+{
+	class NetworkThread
+	{
+	public:
+		NetworkThread(ExitSignal& exitSignal, int networkThreadPort, int physicsThreadPort);
+		void start();
+
+	private:
+		ExitSignal& m_exitSignal;
+
+		Physics::SimulationClock m_simulationClock{};
+		Physics::SimulationBuffer m_simulationBuffer{-1};
+
+		Physics::Notification m_notification{m_simulationClock};
+		Physics::Timestep m_frameCutoff{};
+		UDPCommunication m_udpCommunication;
+
+		PlayerManager m_playerManager{};
+
+		void mainLoop();
+	};
+};

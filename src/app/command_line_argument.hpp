@@ -4,12 +4,13 @@
 
 namespace App
 {
-	inline constexpr int argumentCount = 2;
+	inline constexpr int argumentCount = 3;
 
 	enum class CommandLineArgument
 	{
 		programName,
-		port
+		networkThreadPort,
+		physicsThreadPort
 	};
 
 	std::size_t toSizeT(CommandLineArgument commandLineArgument);

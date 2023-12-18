@@ -173,6 +173,10 @@
     <ClCompile Include="src\app\exit_code.cpp" />
     <ClCompile Include="src\app\exit_signal.cpp" />
     <ClCompile Include="src\app\main.cpp" />
+    <ClCompile Include="src\app\player_manager.cpp" />
+    <ClCompile Include="src\app\threads\network_thread.cpp" />
+    <ClCompile Include="src\app\threads\physics_thread.cpp" />
+    <ClCompile Include="src\app\udp\udp_communication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\app\udp\frame\control_frame.hpp" />
@@ -218,6 +222,11 @@
     <ClInclude Include="src\app\command_line_argument.hpp" />
     <ClInclude Include="src\app\exit_code.hpp" />
     <ClInclude Include="src\app\exit_signal.hpp" />
+    <ClInclude Include="src\app\player_data.hpp" />
+    <ClInclude Include="src\app\player_manager.hpp" />
+    <ClInclude Include="src\app\threads\network_thread.hpp" />
+    <ClInclude Include="src\app\threads\physics_thread.hpp" />
+    <ClInclude Include="src\app\udp\udp_communication.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
