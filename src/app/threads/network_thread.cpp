@@ -33,6 +33,7 @@ namespace App
 
 	void NetworkThread::start()
 	{
+		m_frameCutoff = m_simulationClock.getTime();
 		PhysicsThread physicsThread{m_exitSignal, m_simulationClock, m_simulationBuffer,
 			m_notification, m_udpCommunication, m_playerManager};
 		mainLoop();
