@@ -81,7 +81,7 @@ namespace App
 					if (playerId != -1)
 					{
 						Common::State newPlayerState{};
-						newPlayerState.position = glm::vec3{0, 250, 500};
+						newPlayerState.position = glm::vec3{0, 500, 5000};
 						newPlayerState.velocity = glm::vec3{0, 0, -100};
 						Physics::PlayerInfo newPlayerInfo
 						{

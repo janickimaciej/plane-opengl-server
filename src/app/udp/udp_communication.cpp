@@ -106,7 +106,7 @@ namespace App
 		std::chrono::steady_clock::time_point expiration = now + timeout;
 		
 		static std::vector<std::uint8_t> buffer(maxFrameSize);
-		while(now < expiration)
+		while (now < expiration)
 		{
 			std::chrono::duration<float> remainder = expiration - now;
 			setReceiveSocketTimeout(remainder);

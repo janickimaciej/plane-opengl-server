@@ -50,7 +50,7 @@ namespace App
 	void PhysicsThread::mainLoop(const Physics::Timestep& initialTimestep)
 	{
 		Physics::Timestep timestep = initialTimestep;
-		while(!m_exitSignal.shouldStop())
+		while (!m_exitSignal.shouldStop())
 		{
 			timestep = timestep.next();
 			m_notification.getNotification(timestep);
