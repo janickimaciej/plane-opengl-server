@@ -1,6 +1,6 @@
 #include "app/player_manager.hpp"
 
-#include "app/udp/frame/state_frame.hpp"
+#include "common/config.hpp"
 
 #include <asio/asio.hpp>
 
@@ -44,7 +44,7 @@ namespace App
 		int start = m_idCounter;
 		while (m_players.contains(m_idCounter))
 		{
-			m_idCounter = (m_idCounter + 1) % static_cast<int>(maxPlayerCount);
+			m_idCounter = (m_idCounter + 1) % static_cast<int>(Common::maxPlayerCount);
 			if (m_idCounter == start)
 			{
 				return -1;
@@ -52,7 +52,7 @@ namespace App
 		}
 		
 		int availableId = m_idCounter;
-		m_idCounter = (m_idCounter + 1) % static_cast<int>(maxPlayerCount);
+		m_idCounter = (m_idCounter + 1) % static_cast<int>(Common::maxPlayerCount);
 		return availableId;
 	}
 };

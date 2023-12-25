@@ -1,5 +1,6 @@
 #pragma once
 
+#include "app/player_data.hpp"
 #include "app/udp/udp_frame_type.hpp"
 #include "common/airplane_type_name.hpp"
 #include "physics/player_info.hpp"
@@ -25,10 +26,10 @@ namespace App
 
 		void sendInitResFrame(const asio::ip::udp::endpoint& endpoint,
 			const Physics::Timestamp& clientTimestamp, int playerId);
-		void sendControlFrame(const asio::ip::udp::endpoint& endpoint,
+		void broadcastControlFrame(const std::unordered_map<int, PlayerData>& playerDatas,
 			const Physics::Timestamp& clientTimestamp, const Physics::Timestep& timestep,
 			int playerId, const Physics::PlayerInput& playerInput);
-		void sendStateFrame(const asio::ip::udp::endpoint& endpoint,
+		void broadcastStateFrame(const std::unordered_map<int, PlayerData>& playerDatas,
 			const Physics::Timestep& timestep,
 			const std::unordered_map<int, Physics::PlayerInfo>& playerInfos);
 

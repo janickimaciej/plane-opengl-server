@@ -6,6 +6,7 @@
 #include "app/udp/udp_communication.hpp"
 #include "app/udp/udp_frame_type.hpp"
 #include "common/airplane_type_name.hpp"
+#include "common/config.hpp"
 #include "physics/notification.hpp"
 #include "physics/player_info.hpp"
 #include "physics/player_input.hpp"
@@ -56,7 +57,7 @@ namespace App
 				clientTimestamp, udpFrameType, airplaneTypeName, timestep, playerId, playerInput);
 			
 			constexpr Physics::Timestep frameAgeCutoffOffset{0,
-				static_cast<unsigned int>(Physics::framesPerSecond * 0.9f)};
+				static_cast<unsigned int>(Common::framesPerSecond * 0.9f)};
 			Physics::Timestep frameAgeCutoff = m_simulationClock.getTime() - frameAgeCutoffOffset;
 			if (m_frameCutoff < frameAgeCutoff)
 			{
@@ -104,11 +105,8 @@ namespace App
 			{
 				m_simulationBuffer.writeControlFrame(timestep, playerId, playerInput);
 				m_notification.setNotification(timestep, false);
-				for (const std::pair<const int, PlayerData>& player : m_playerManager.getPlayers())
-				{
-					m_udpCommunication.sendControlFrame(m_playerManager.getEndpoint(player.first),
-						clientTimestamp, timestep, playerId, playerInput);
-				}
+				m_udpCommunication.broadcastControlFrame(m_playerManager.getPlayers(),
+					clientTimestamp, timestep, playerId, playerInput);
 			}
 		}
 	}

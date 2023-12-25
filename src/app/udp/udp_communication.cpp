@@ -1,5 +1,6 @@
 #include "app/udp/udp_communication.hpp"
 
+#include "app/player_data.hpp"
 #include "app/udp/udp_frame_type.hpp"
 #include "app/udp/udp_serializer.hpp"
 #include "common/airplane_type_name.hpp"
@@ -40,25 +41,32 @@ namespace App
 		m_networkThreadSocket.send_to(asio::buffer(buffer), endpoint);
 	}
 
-	void UDPCommunication::sendControlFrame(const asio::ip::udp::endpoint& endpoint,
-		const Physics::Timestamp& clientTimestamp, const Physics::Timestep& timestep,
-		int playerId, const Physics::PlayerInput& playerInput)
+	void UDPCommunication::broadcastControlFrame(
+		const std::unordered_map<int, PlayerData>& playerDatas,
+		const Physics::Timestamp& clientTimestamp, const Physics::Timestep& timestep, int playerId,
+		const Physics::PlayerInput& playerInput)
 	{
 		std::vector<std::uint8_t> buffer{};
 		UDPSerializer::serializeControlFrame(clientTimestamp, Physics::Timestamp::systemNow(),
 			timestep, playerId, playerInput, buffer);
 
-		m_networkThreadSocket.send_to(asio::buffer(buffer), endpoint);
+		for (const std::pair<const int, PlayerData>& player : playerDatas)
+		{
+			m_networkThreadSocket.send_to(asio::buffer(buffer), player.second.endpoint);
+		}
 	}
 
-	void UDPCommunication::sendStateFrame(const asio::ip::udp::endpoint& endpoint,
-		const Physics::Timestep& timestep,
+	void UDPCommunication::broadcastStateFrame(
+		const std::unordered_map<int, PlayerData>& playerDatas, const Physics::Timestep& timestep,
 		const std::unordered_map<int, Physics::PlayerInfo>& playerInfos)
 	{
 		std::vector<std::uint8_t> buffer{};
 		UDPSerializer::serializeStateFrame(timestep, playerInfos, buffer);
 
-		m_physicsThreadSocket.send_to(asio::buffer(buffer), endpoint);
+		for (const std::pair<const int, PlayerData>& player : playerDatas)
+		{
+			m_physicsThreadSocket.send_to(asio::buffer(buffer), player.second.endpoint);
+		}
 	}
 
 	bool UDPCommunication::receiveInitReqOrControlFrame(asio::ip::udp::endpoint& endpoint,
