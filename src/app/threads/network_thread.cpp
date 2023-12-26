@@ -23,6 +23,7 @@
 #include <thread>
 #include <unordered_map>
 #include <utility>
+#include <vector>
 
 namespace App
 {
@@ -45,6 +46,8 @@ namespace App
 	{
 		while (!m_exitSignal.shouldStop())
 		{
+			kickInactivePlayers();
+
 			asio::ip::udp::endpoint endpoint{};
 			Physics::Timestamp clientTimestamp{};
 			UDPFrameType udpFrameType{};
@@ -71,43 +74,67 @@ namespace App
 
 			if (udpFrameType == UDPFrameType::initReq)
 			{
-				playerId = m_playerManager.getPlayerId(endpoint);
-				if (playerId != -1)
-				{
-					m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, playerId);
-				}
-				else
-				{
-					playerId = m_playerManager.addNewPlayer(endpoint);
-					if (playerId != -1)
-					{
-						Common::State newPlayerState{};
-						newPlayerState.position = glm::vec3{0, 500, 5000};
-						newPlayerState.velocity = glm::vec3{0, 0, -100};
-						Physics::PlayerInfo newPlayerInfo
-						{
-							Physics::PlayerInput{},
-							Physics::PlayerState
-							{
-								100,
-								newPlayerState,
-								airplaneTypeName
-							}
-						};
-						timestep = m_simulationClock.getTime();
-						m_simulationBuffer.writeInitFrame(timestep, playerId, newPlayerInfo);
-						m_notification.setNotification(timestep, false);
-						m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, playerId);
-					}
-				}
+				handleInitReqFrame(endpoint, clientTimestamp, airplaneTypeName);
 			}
 			else if (udpFrameType == UDPFrameType::control && timestep > m_frameCutoff)
 			{
-				m_simulationBuffer.writeControlFrame(timestep, playerId, playerInput);
-				m_notification.setNotification(timestep, false);
-				m_udpCommunication.broadcastControlFrame(m_playerManager.getPlayers(),
-					clientTimestamp, timestep, playerId, playerInput);
+				handleControlFrame(clientTimestamp, timestep, playerId, playerInput);
 			}
 		}
+	}
+
+	void NetworkThread::kickInactivePlayers()
+	{
+		Physics::Timestep timestep = m_simulationClock.getTime();	
+		std::vector<int> inactivePlayers = m_playerManager.kickInactivePlayers(timestep);
+		if (!inactivePlayers.empty())
+		{
+			m_simulationBuffer.removeInactivePlayers(inactivePlayers, timestep);
+			m_notification.setNotification(timestep, false);
+		}
+	}
+
+	void NetworkThread::handleInitReqFrame(const asio::ip::udp::endpoint& endpoint,
+		const Physics::Timestamp& clientTimestamp, const Common::AirplaneTypeName& airplaneTypeName)
+	{
+		int playerId = m_playerManager.getPlayerId(endpoint);
+		if (playerId != -1)
+		{
+			m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, playerId);
+		}
+		else
+		{
+			Physics::Timestep timestep = m_simulationClock.getTime();
+			playerId = m_playerManager.addNewPlayer(endpoint, timestep);
+			if (playerId != -1)
+			{
+				Common::State state{};
+				state.position = glm::vec3{0, 500, 5000};
+				state.velocity = glm::vec3{0, 0, -100};
+				Physics::PlayerInfo playerInfo
+				{
+					Physics::PlayerInput{},
+					Physics::PlayerState
+					{
+						100,
+						state,
+						airplaneTypeName
+					}
+				};
+				m_simulationBuffer.writeInitFrame(timestep, playerId, playerInfo);
+				m_notification.setNotification(timestep, false);
+				m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, playerId);
+			}
+		}
+	}
+
+	void NetworkThread::handleControlFrame(const Physics::Timestamp& clientTimestamp,
+		const Physics::Timestep& timestep, int playerId, const Physics::PlayerInput& playerInput)
+	{
+		m_simulationBuffer.writeControlFrame(timestep, playerId, playerInput);
+				m_notification.setNotification(timestep, false);
+		m_udpCommunication.broadcastControlFrame(m_playerManager.getPlayers(),
+			clientTimestamp, timestep, playerId, playerInput);
+		m_playerManager.bumpPlayer(playerId, m_simulationClock.getTime());
 	}
 };

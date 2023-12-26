@@ -222,6 +222,7 @@
     <ClInclude Include="src\app\command_line_argument.hpp" />
     <ClInclude Include="src\app\exit_code.hpp" />
     <ClInclude Include="src\app\exit_signal.hpp" />
+    <ClInclude Include="src\app\kick_queue_element.hpp" />
     <ClInclude Include="src\app\player_data.hpp" />
     <ClInclude Include="src\app\player_manager.hpp" />
     <ClInclude Include="src\app\threads\network_thread.hpp" />

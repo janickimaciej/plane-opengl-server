@@ -30,5 +30,13 @@ namespace App
 		PlayerManager m_playerManager{};
 
 		void mainLoop();
+
+		void kickInactivePlayers();
+		void handleInitReqFrame(const asio::ip::udp::endpoint& endpoint,
+			const Physics::Timestamp& clientTimestamp,
+			const Common::AirplaneTypeName& airplaneTypeName);
+		void handleControlFrame(const Physics::Timestamp& clientTimestamp,
+			const Physics::Timestep& timestep, int playerId,
+			const Physics::PlayerInput& playerInput);
 	};
 };
