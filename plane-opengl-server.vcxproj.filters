@@ -56,7 +56,6 @@
     <ClInclude Include="core\physics\model_dynamics\rigid_body_dynamics.hpp" />
     <ClInclude Include="core\physics\models\airplane.hpp" />
     <ClInclude Include="core\physics\models\model.hpp" />
-    <ClInclude Include="core\physics\airplane_params_database.hpp" />
     <ClInclude Include="core\physics\atmosphere.hpp" />
     <ClInclude Include="core\physics\day_night_cycle.hpp" />
     <ClInclude Include="core\physics\flight_ctrl.hpp" />
@@ -79,6 +78,9 @@
     <ClInclude Include="src\app\player_data.hpp" />
     <ClInclude Include="src\app\player_manager.hpp" />
     <ClInclude Include="src\app\kick_queue_element.hpp" />
+    <ClInclude Include="core\physics\airplane_params_database\jw1.hpp" />
+    <ClInclude Include="core\common\config.hpp" />
+    <ClInclude Include="core\physics\airplane_params_database\airplane_params_database.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

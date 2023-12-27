@@ -109,8 +109,20 @@ namespace App
 			if (playerId != -1)
 			{
 				Common::State state{};
+				
 				state.position = glm::vec3{0, 500, 5000};
-				state.velocity = glm::vec3{0, 0, -100};
+
+				switch (airplaneTypeName)
+				{
+				case Common::AirplaneTypeName::mustang:
+					state.velocity = glm::vec3{0, 0, -100};
+					break;
+
+				case Common::AirplaneTypeName::jw1:
+					state.velocity = glm::vec3{0, 0, -343};
+					break;
+				}
+
 				Physics::PlayerInfo playerInfo
 				{
 					Physics::PlayerInput{},

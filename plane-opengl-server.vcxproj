@@ -190,6 +190,7 @@
     <ClInclude Include="core\common\airplane_ctrl.hpp" />
     <ClInclude Include="core\common\airplane_info.hpp" />
     <ClInclude Include="core\common\airplane_type_name.hpp" />
+    <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\common\state.hpp" />
     <ClInclude Include="core\common\transformable.hpp" />
     <ClInclude Include="core\physics\airplane_params\airplane_params.hpp" />
@@ -197,7 +198,8 @@
     <ClInclude Include="core\physics\airplane_params\inertia_params.hpp" />
     <ClInclude Include="core\physics\airplane_params\propulsion_params.hpp" />
     <ClInclude Include="core\physics\airplane_params\surface_params.hpp" />
-    <ClInclude Include="core\physics\airplane_params_database.hpp" />
+    <ClInclude Include="core\physics\airplane_params_database\airplane_params_database.hpp" />
+    <ClInclude Include="core\physics\airplane_params_database\jw1.hpp" />
     <ClInclude Include="core\physics\airplane_params_database\mustang.hpp" />
     <ClInclude Include="core\physics\atmosphere.hpp" />
     <ClInclude Include="core\physics\day_night_cycle.hpp" />
