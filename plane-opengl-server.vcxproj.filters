@@ -28,6 +28,15 @@
     <ClCompile Include="src\app\threads\physics_thread.cpp" />
     <ClCompile Include="src\app\player_manager.cpp" />
     <ClCompile Include="src\app\udp\udp_communication.cpp" />
+    <ClCompile Include="core\common\terrains\maps\airport_map.cpp" />
+    <ClCompile Include="core\common\terrains\maps\hills_map.cpp" />
+    <ClCompile Include="core\common\terrains\maps\map.cpp" />
+    <ClCompile Include="core\common\terrains\composite_terrain.cpp" />
+    <ClCompile Include="core\common\terrains\hill.cpp" />
+    <ClCompile Include="core\common\terrains\wave_x.cpp" />
+    <ClCompile Include="core\common\terrains\wave_z.cpp" />
+    <ClCompile Include="core\physics\model_dynamics\bullet_dynamics.cpp" />
+    <ClCompile Include="core\physics\models\bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\command_line_argument.hpp" />
@@ -81,6 +90,18 @@
     <ClInclude Include="core\physics\airplane_params_database\jw1.hpp" />
     <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\physics\airplane_params_database\airplane_params_database.hpp" />
+    <ClInclude Include="core\common\terrains\maps\airport_map.hpp" />
+    <ClInclude Include="core\common\terrains\maps\hills_map.hpp" />
+    <ClInclude Include="core\common\terrains\maps\map.hpp" />
+    <ClInclude Include="core\common\terrains\composite_terrain.hpp" />
+    <ClInclude Include="core\common\terrains\hill.hpp" />
+    <ClInclude Include="core\common\terrains\terrain.hpp" />
+    <ClInclude Include="core\common\terrains\wave_x.hpp" />
+    <ClInclude Include="core\common\terrains\wave_z.hpp" />
+    <ClInclude Include="core\common\bullet_info.hpp" />
+    <ClInclude Include="core\common\scene_info.hpp" />
+    <ClInclude Include="core\physics\model_dynamics\bullet_dynamics.hpp" />
+    <ClInclude Include="core\physics\models\bullet.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
