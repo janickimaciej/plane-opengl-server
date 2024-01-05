@@ -4,7 +4,6 @@
     <ClCompile Include="src\app\main.cpp" />
     <ClCompile Include="src\app\command_line_argument.cpp" />
     <ClCompile Include="src\app\exit_code.cpp" />
-    <ClCompile Include="src\app\exit_signal.cpp" />
     <ClCompile Include="core\app\udp\udp_frame_type.cpp" />
     <ClCompile Include="core\app\udp\udp_serializer.cpp" />
     <ClCompile Include="core\common\airplane_type_name.cpp" />
@@ -37,11 +36,11 @@
     <ClCompile Include="core\common\terrains\wave_z.cpp" />
     <ClCompile Include="core\physics\model_dynamics\bullet_dynamics.cpp" />
     <ClCompile Include="core\physics\models\bullet.cpp" />
+    <ClCompile Include="core\app\exit_signal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\command_line_argument.hpp" />
     <ClInclude Include="src\app\exit_code.hpp" />
-    <ClInclude Include="src\app\exit_signal.hpp" />
     <ClInclude Include="core\app\udp\frame\control_frame.hpp" />
     <ClInclude Include="core\app\udp\frame\init_req_frame.hpp" />
     <ClInclude Include="core\app\udp\frame\init_res_frame.hpp" />
@@ -49,7 +48,6 @@
     <ClInclude Include="core\app\udp\frame\state_frame_player_info.hpp" />
     <ClInclude Include="core\app\udp\udp_frame_type.hpp" />
     <ClInclude Include="core\app\udp\udp_serializer.hpp" />
-    <ClInclude Include="core\common\airplane_center_of_mass_database.hpp" />
     <ClInclude Include="core\common\airplane_ctrl.hpp" />
     <ClInclude Include="core\common\airplane_info.hpp" />
     <ClInclude Include="core\common\airplane_type_name.hpp" />
@@ -89,7 +87,6 @@
     <ClInclude Include="src\app\kick_queue_element.hpp" />
     <ClInclude Include="core\physics\airplane_params_database\jw1.hpp" />
     <ClInclude Include="core\common\config.hpp" />
-    <ClInclude Include="core\physics\airplane_params_database\airplane_params_database.hpp" />
     <ClInclude Include="core\common\terrains\maps\airport_map.hpp" />
     <ClInclude Include="core\common\terrains\maps\hills_map.hpp" />
     <ClInclude Include="core\common\terrains\maps\map.hpp" />
@@ -102,6 +99,10 @@
     <ClInclude Include="core\common\scene_info.hpp" />
     <ClInclude Include="core\physics\model_dynamics\bullet_dynamics.hpp" />
     <ClInclude Include="core\physics\models\bullet.hpp" />
+    <ClInclude Include="core\app\exit_signal.hpp" />
+    <ClInclude Include="core\common\airplane_centers_of_mass.hpp" />
+    <ClInclude Include="core\physics\airplane_definition.hpp" />
+    <ClInclude Include="core\physics\airplane_definitions.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

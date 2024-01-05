@@ -58,7 +58,7 @@ namespace App
 
 			m_simulationBuffer.update(timestep);
 
-			if (timestep.frame == 0)
+			if (timestep.step == 0)
 			{
 				std::unordered_map<int, Physics::PlayerInfo> playerInfos =
 					m_simulationBuffer.getPlayerInfos(timestep);

@@ -7,6 +7,7 @@
 #include "app/udp/udp_frame_type.hpp"
 #include "common/airplane_type_name.hpp"
 #include "common/config.hpp"
+#include "physics/airplane_definitions.hpp"
 #include "physics/notification.hpp"
 #include "physics/player_info.hpp"
 #include "physics/player_input.hpp"
@@ -60,7 +61,7 @@ namespace App
 				clientTimestamp, udpFrameType, airplaneTypeName, timestep, playerId, playerInput);
 			
 			constexpr Physics::Timestep frameAgeCutoffOffset{0,
-				static_cast<unsigned int>(Common::framesPerSecond * 0.9f)};
+				static_cast<unsigned int>(Common::stepsPerSecond * 0.9f)};
 			Physics::Timestep frameAgeCutoff = m_simulationClock.getTime() - frameAgeCutoffOffset;
 			if (m_frameCutoff < frameAgeCutoff)
 			{
@@ -111,24 +112,15 @@ namespace App
 				Common::State state{};
 				
 				state.position = glm::vec3{0, 500, 5000};
-
-				switch (airplaneTypeName)
-				{
-				case Common::AirplaneTypeName::mustang:
-					state.velocity = glm::vec3{0, 0, -100};
-					break;
-
-				case Common::AirplaneTypeName::jw1:
-					state.velocity = glm::vec3{0, 0, -343};
-					break;
-				}
+				state.velocity =
+					Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialVelocity;
 
 				Physics::PlayerInfo playerInfo
 				{
 					Physics::PlayerInput{},
 					Physics::PlayerState
 					{
-						100,
+						Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialHP,
 						state,
 						airplaneTypeName
 					}
