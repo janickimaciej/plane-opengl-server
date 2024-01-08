@@ -3,6 +3,7 @@
 #include "app/exit_signal.hpp"
 #include "app/player_manager.hpp"
 #include "app/udp/udp_communication.hpp"
+#include "common/map_name.hpp"
 #include "physics/notification.hpp"
 #include "physics/simulation_buffer.hpp"
 #include "physics/simulation_clock.hpp"
@@ -14,14 +15,15 @@ namespace App
 	class NetworkThread
 	{
 	public:
-		NetworkThread(ExitSignal& exitSignal, int networkThreadPort, int physicsThreadPort);
+		NetworkThread(ExitSignal& exitSignal, Common::MapName mapName, int networkThreadPort,
+			int physicsThreadPort);
 		void start();
 
 	private:
 		ExitSignal& m_exitSignal;
 
 		Physics::SimulationClock m_simulationClock{};
-		Physics::SimulationBuffer m_simulationBuffer{-1};
+		Physics::SimulationBuffer m_simulationBuffer;
 
 		Physics::Notification m_notification{m_simulationClock};
 		Physics::Timestep m_frameCutoff{};

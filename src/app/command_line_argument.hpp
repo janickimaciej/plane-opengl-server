@@ -4,11 +4,12 @@
 
 namespace App
 {
-	inline constexpr int argumentCount = 3;
+	inline constexpr int argumentCount = 4;
 
 	enum class CommandLineArgument
 	{
 		programName,
+		map,
 		networkThreadPort,
 		physicsThreadPort
 	};

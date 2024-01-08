@@ -37,6 +37,9 @@
     <ClCompile Include="core\physics\model_dynamics\bullet_dynamics.cpp" />
     <ClCompile Include="core\physics\models\bullet.cpp" />
     <ClCompile Include="core\app\exit_signal.cpp" />
+    <ClCompile Include="core\common\map_name.cpp" />
+    <ClCompile Include="core\physics\collisions\collision_test.cpp" />
+    <ClCompile Include="core\physics\simulation_buffer_element.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\command_line_argument.hpp" />
@@ -103,6 +106,11 @@
     <ClInclude Include="core\common\airplane_centers_of_mass.hpp" />
     <ClInclude Include="core\physics\airplane_definition.hpp" />
     <ClInclude Include="core\physics\airplane_definitions.hpp" />
+    <ClInclude Include="core\common\map_name.hpp" />
+    <ClInclude Include="core\common\terrains\maps\maps.hpp" />
+    <ClInclude Include="core\physics\collisions\airplane.hpp" />
+    <ClInclude Include="core\physics\collisions\ellipsoid.hpp" />
+    <ClInclude Include="core\physics\collisions\collision_test.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

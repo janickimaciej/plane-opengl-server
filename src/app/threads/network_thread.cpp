@@ -7,6 +7,7 @@
 #include "app/udp/udp_frame_type.hpp"
 #include "common/airplane_type_name.hpp"
 #include "common/config.hpp"
+#include "common/map_name.hpp"
 #include "physics/airplane_definitions.hpp"
 #include "physics/notification.hpp"
 #include "physics/player_info.hpp"
@@ -28,9 +29,10 @@
 
 namespace App
 {
-	NetworkThread::NetworkThread(ExitSignal& exitSignal, int networkThreadPort,
-		int physicsThreadPort) :
+	NetworkThread::NetworkThread(ExitSignal& exitSignal, Common::MapName mapName,
+		int networkThreadPort, int physicsThreadPort) :
 		m_exitSignal{exitSignal},
+		m_simulationBuffer{-1, mapName},
 		m_udpCommunication{networkThreadPort, physicsThreadPort}
 	{ }
 
@@ -120,9 +122,9 @@ namespace App
 					Physics::PlayerInput{},
 					Physics::PlayerState
 					{
+						airplaneTypeName,
 						Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialHP,
-						state,
-						airplaneTypeName
+						state
 					}
 				};
 				m_simulationBuffer.writeInitFrame(timestep, playerId, playerInfo);
