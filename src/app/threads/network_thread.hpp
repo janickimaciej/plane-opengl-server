@@ -33,7 +33,7 @@ namespace App
 
 		void mainLoop();
 
-		void kickInactivePlayers();
+		void kickPlayers();
 		void handleInitReqFrame(const asio::ip::udp::endpoint& endpoint,
 			const Physics::Timestamp& clientTimestamp,
 			const Common::AirplaneTypeName& airplaneTypeName);

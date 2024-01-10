@@ -41,7 +41,7 @@ namespace App
 		if (newPlayerId != -1)
 		{
 			m_players.insert({newPlayerId, PlayerData{endpoint}});
-			m_kickQueue.push_back(KickQueueElement{newPlayerId, timestep});
+			m_kickQueue.push_back(KickQueueElement{newPlayerId, timestep, false});
 			m_kickQueueIterators.at(static_cast<unsigned int>(newPlayerId)) =
 				std::prev(m_kickQueue.end());
 		}
@@ -53,12 +53,16 @@ namespace App
 
 	void PlayerManager::bumpPlayer(int playerId, const Physics::Timestep& timestep)
 	{
+		if (m_kickQueueIterators.at(static_cast<unsigned int>(playerId))->isDead)
+		{
+			return;
+		}
 		m_kickQueue.erase(m_kickQueueIterators.at(static_cast<unsigned int>(playerId)));
 		m_kickQueue.push_back(KickQueueElement{playerId, timestep});
 		m_kickQueueIterators.at(static_cast<unsigned int>(playerId)) = std::prev(m_kickQueue.end());
 	}
 
-	std::vector<int> PlayerManager::kickInactivePlayers(const Physics::Timestep& timestep)
+	std::vector<int> PlayerManager::kickPlayers(const Physics::Timestep& timestep)
 	{
 		m_mutex.lock();
 
@@ -87,6 +91,15 @@ namespace App
 		m_mutex.unlock();
 
 		return players;
+	}
+
+	void PlayerManager::killPlayer(int playerId)
+	{
+		m_mutex.lock();
+
+		m_kickQueueIterators.at(playerId)->isDead = true;
+
+		m_mutex.unlock();
 	}
 
 	int PlayerManager::getAvailableId()

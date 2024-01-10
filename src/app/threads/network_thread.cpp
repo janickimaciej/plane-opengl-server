@@ -49,7 +49,7 @@ namespace App
 	{
 		while (!m_exitSignal.shouldStop())
 		{
-			kickInactivePlayers();
+			kickPlayers();
 
 			asio::ip::udp::endpoint endpoint{};
 			Physics::Timestamp clientTimestamp{};
@@ -86,13 +86,13 @@ namespace App
 		}
 	}
 
-	void NetworkThread::kickInactivePlayers()
+	void NetworkThread::kickPlayers()
 	{
 		Physics::Timestep timestep = m_simulationClock.getTime();	
-		std::vector<int> inactivePlayers = m_playerManager.kickInactivePlayers(timestep);
-		if (!inactivePlayers.empty())
+		std::vector<int> kickedPlayers = m_playerManager.kickPlayers(timestep);
+		if (!kickedPlayers.empty())
 		{
-			m_simulationBuffer.removeInactivePlayers(inactivePlayers, timestep);
+			m_simulationBuffer.kickPlayers(kickedPlayers, timestep);
 			m_notification.setNotification(timestep, false);
 		}
 	}
@@ -113,7 +113,7 @@ namespace App
 			{
 				Common::State state{};
 				
-				state.position = glm::vec3{0, 500, 5000};
+				state.position = glm::vec3{10000, 500, 20000};
 				state.velocity =
 					Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialVelocity;
 

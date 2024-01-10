@@ -25,8 +25,9 @@ namespace App
 		int addNewPlayer(const asio::ip::udp::endpoint& endpoint,
 			const Physics::Timestep& timestep);
 		void bumpPlayer(int playerId, const Physics::Timestep& timestep);
-		std::vector<int> kickInactivePlayers(const Physics::Timestep& timestep);
+		std::vector<int> kickPlayers(const Physics::Timestep& timestep);
 		std::unordered_map<int, PlayerData> getPlayers() const;
+		void killPlayer(int playerId);
 
 	private:
 		std::unordered_map<int, PlayerData> m_players{};

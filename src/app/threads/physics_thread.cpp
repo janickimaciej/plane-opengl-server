@@ -62,6 +62,13 @@ namespace App
 			{
 				std::unordered_map<int, Physics::PlayerInfo> playerInfos =
 					m_simulationBuffer.getPlayerInfos(timestep);
+				for (const std::pair<const int, Physics::PlayerInfo>& playerInfo : playerInfos)
+				{
+					if (playerInfo.second.state.hp == 0)
+					{
+						m_playerManager.killPlayer(playerInfo.first);
+					}
+				}
 				m_udpCommunication.broadcastStateFrame(m_playerManager.getPlayers(), timestep,
 					playerInfos);
 			}

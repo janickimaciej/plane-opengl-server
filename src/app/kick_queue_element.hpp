@@ -8,5 +8,6 @@ namespace App
 	{
 		int playerId{};
 		Physics::Timestep lastFrameTimestep{};
+		bool isDead{};
 	};
 };
