@@ -66,7 +66,7 @@ namespace App
 				{
 					if (playerInfo.second.state.hp == 0)
 					{
-						m_playerManager.killPlayer(playerInfo.first);
+						m_playerManager.killPlayer(playerInfo.first, timestep);
 					}
 				}
 				m_udpCommunication.broadcastStateFrame(m_playerManager.getPlayers(), timestep,

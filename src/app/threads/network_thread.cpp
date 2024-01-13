@@ -20,6 +20,7 @@
 
 #include <atomic>
 #include <memory>
+#include <optional>
 #include <semaphore>
 #include <string>
 #include <thread>
@@ -100,16 +101,16 @@ namespace App
 	void NetworkThread::handleInitReqFrame(const asio::ip::udp::endpoint& endpoint,
 		const Physics::Timestamp& clientTimestamp, const Common::AirplaneTypeName& airplaneTypeName)
 	{
-		int playerId = m_playerManager.getPlayerId(endpoint);
-		if (playerId != -1)
+		std::optional<int> playerId = m_playerManager.getPlayerId(endpoint);
+		if (playerId)
 		{
-			m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, playerId);
+			m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, *playerId);
 		}
 		else
 		{
 			Physics::Timestep timestep = m_simulationClock.getTime();
 			playerId = m_playerManager.addNewPlayer(endpoint, timestep);
-			if (playerId != -1)
+			if (playerId)
 			{
 				Common::State state{};
 				
@@ -127,9 +128,9 @@ namespace App
 						state
 					}
 				};
-				m_simulationBuffer.writeInitFrame(timestep, playerId, playerInfo);
+				m_simulationBuffer.writeInitFrame(timestep, *playerId, playerInfo);
 				m_notification.setNotification(timestep, false);
-				m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, playerId);
+				m_udpCommunication.sendInitResFrame(endpoint, clientTimestamp, *playerId);
 			}
 		}
 	}

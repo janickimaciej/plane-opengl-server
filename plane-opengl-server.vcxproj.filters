@@ -87,7 +87,6 @@
     <ClInclude Include="src\app\threads\physics_thread.hpp" />
     <ClInclude Include="src\app\player_data.hpp" />
     <ClInclude Include="src\app\player_manager.hpp" />
-    <ClInclude Include="src\app\kick_queue_element.hpp" />
     <ClInclude Include="core\physics\airplane_params_database\jw1.hpp" />
     <ClInclude Include="core\common\config.hpp" />
     <ClInclude Include="core\common\terrains\maps\airport_map.hpp" />

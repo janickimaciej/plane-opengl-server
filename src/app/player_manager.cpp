@@ -5,45 +5,40 @@
 
 #include <asio/asio.hpp>
 
+#include <optional>
 #include <utility>
 #include <vector>
 
 namespace App
 {
-	PlayerManager::PlayerManager()
+	std::optional<int> PlayerManager::getPlayerId(const asio::ip::udp::endpoint& endpoint) const
 	{
-		for (KickQueue::iterator& iter : m_kickQueueIterators)
-		{
-			iter = m_kickQueue.end();
-		}
-	}
-
-	int PlayerManager::getPlayerId(const asio::ip::udp::endpoint& endpoint) const
-	{
-		int playerId = -1;
 		for (const std::pair<const int, PlayerData>& player : m_players)
 		{
 			if (player.second.endpoint == endpoint)
 			{
-				playerId = player.first;
-				break;
+				return player.first;
 			}
 		}
-		return playerId;
+		return std::nullopt;
 	}
 	
-	int PlayerManager::addNewPlayer(const asio::ip::udp::endpoint& endpoint,
+	std::optional<int> PlayerManager::addNewPlayer(const asio::ip::udp::endpoint& endpoint,
 		const Physics::Timestep& timestep)
 	{
 		m_mutex.lock();
 
-		int newPlayerId = getAvailableId();
-		if (newPlayerId != -1)
+		std::optional<int> newPlayerId = getAvailableId();
+		if (newPlayerId)
 		{
-			m_players.insert({newPlayerId, PlayerData{endpoint}});
-			m_kickQueue.push_back(KickQueueElement{newPlayerId, timestep, false});
-			m_kickQueueIterators.at(static_cast<unsigned int>(newPlayerId)) =
-				std::prev(m_kickQueue.end());
+			static const Physics::Timestep timeout{10, 0};
+			m_players.insert({*newPlayerId,
+				PlayerData
+				{
+					endpoint,
+					timestep + timeout,
+					false
+				}});
 		}
 
 		m_mutex.unlock();
@@ -53,33 +48,37 @@ namespace App
 
 	void PlayerManager::bumpPlayer(int playerId, const Physics::Timestep& timestep)
 	{
-		if (m_kickQueueIterators.at(static_cast<unsigned int>(playerId))->isDead)
+		m_mutex.lock();
+
+		if (!m_players.at(playerId).keepAliveLock)
 		{
-			return;
+			static const Physics::Timestep timeout{10, 0};
+			m_players.at(playerId).keepAliveTimestep = timestep + timeout;
 		}
-		m_kickQueue.erase(m_kickQueueIterators.at(static_cast<unsigned int>(playerId)));
-		m_kickQueue.push_back(KickQueueElement{playerId, timestep});
-		m_kickQueueIterators.at(static_cast<unsigned int>(playerId)) = std::prev(m_kickQueue.end());
+
+		m_mutex.unlock();
 	}
 
 	std::vector<int> PlayerManager::kickPlayers(const Physics::Timestep& timestep)
 	{
 		m_mutex.lock();
 
-		std::vector<int> inactivePlayerIds{};
-		static const Physics::Timestep timeout{10, 0};
-		while (!m_kickQueue.empty() && timestep > m_kickQueue.front().lastFrameTimestep + timeout)
+		std::vector<int> kickedPlayerIds{};
+		for (const std::pair<const int, PlayerData>& player : m_players)
 		{
-			int playerId = m_kickQueue.front().playerId;
-			m_kickQueueIterators.at(static_cast<unsigned int>(playerId)) = m_kickQueue.end();
-			m_kickQueue.erase(m_kickQueue.begin());
-			m_players.erase(playerId);
-			inactivePlayerIds.push_back(playerId);
+			if (timestep > player.second.keepAliveTimestep)
+			{
+				kickedPlayerIds.push_back(player.first);
+			}
+		}
+		for (int kickedPlayerId : kickedPlayerIds)
+		{
+			m_players.erase(kickedPlayerId);
 		}
 
 		m_mutex.unlock();
 
-		return inactivePlayerIds;
+		return kickedPlayerIds;
 	}
 
 	std::unordered_map<int, PlayerData> PlayerManager::getPlayers() const
@@ -93,16 +92,18 @@ namespace App
 		return players;
 	}
 
-	void PlayerManager::killPlayer(int playerId)
+	void PlayerManager::killPlayer(int playerId, const Physics::Timestep& timestep)
 	{
 		m_mutex.lock();
 
-		m_kickQueueIterators.at(playerId)->isDead = true;
+		static const Physics::Timestep timeout{5, 0};
+		m_players.at(playerId).keepAliveTimestep = timestep + timeout;
+		m_players.at(playerId).keepAliveLock = true;
 
 		m_mutex.unlock();
 	}
 
-	int PlayerManager::getAvailableId()
+	std::optional<int> PlayerManager::getAvailableId()
 	{
 		int start = m_idCounter;
 		while (m_players.contains(m_idCounter))
@@ -110,7 +111,7 @@ namespace App
 			m_idCounter = (m_idCounter + 1) % static_cast<int>(Common::maxPlayerCount);
 			if (m_idCounter == start)
 			{
-				return -1;
+				return std::nullopt;
 			}
 		}
 		
