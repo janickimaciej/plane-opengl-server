@@ -114,7 +114,7 @@ namespace App
 			{
 				Common::State state{};
 				
-				state.position = glm::vec3{10000, 500, 20000};
+				state.position = glm::vec3{10000, 3000, 20000};
 				state.velocity =
 					Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialVelocity;
 
