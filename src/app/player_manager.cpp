@@ -22,6 +22,11 @@ namespace App
 		}
 		return std::nullopt;
 	}
+
+	bool PlayerManager::isPlayerIdValid(int playerId) const
+	{
+		return m_players.contains(playerId);
+	}
 	
 	std::optional<int> PlayerManager::addNewPlayer(const asio::ip::udp::endpoint& endpoint,
 		const Physics::Timestep& timestep)
@@ -96,9 +101,12 @@ namespace App
 	{
 		m_mutex.lock();
 
-		static const Physics::Timestep timeout{5, 0};
-		m_players.at(playerId).keepAliveTimestep = timestep + timeout;
-		m_players.at(playerId).keepAliveLock = true;
+		if (!m_players.at(playerId).keepAliveLock)
+		{
+			m_players.at(playerId).keepAliveLock = true;
+			static const Physics::Timestep timeout{5, 0};
+			m_players.at(playerId).keepAliveTimestep = timestep + timeout;
+		}
 
 		m_mutex.unlock();
 	}

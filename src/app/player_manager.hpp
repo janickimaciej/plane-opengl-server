@@ -19,6 +19,7 @@ namespace App
 	{
 	public:
 		std::optional<int> getPlayerId(const asio::ip::udp::endpoint& endpoint) const;
+		bool isPlayerIdValid(int playerId) const;
 		std::optional<int> addNewPlayer(const asio::ip::udp::endpoint& endpoint,
 			const Physics::Timestep& timestep);
 		void bumpPlayer(int playerId, const Physics::Timestep& timestep);

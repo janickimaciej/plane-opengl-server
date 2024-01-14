@@ -114,7 +114,11 @@ namespace App
 			{
 				Common::State state{};
 				
-				state.position = glm::vec3{10000, 3000, 20000};
+				constexpr glm::vec3 initialPosition{15000, 550, 8500};
+				state.position = initialPosition;
+				const glm::quat initialOrientation =
+					glm::angleAxis(glm::radians(80.0f), glm::vec3{0, 1, 0});
+				state.orientation = initialOrientation;
 				state.velocity =
 					Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialVelocity;
 
@@ -138,6 +142,10 @@ namespace App
 	void NetworkThread::handleControlFrame(const Physics::Timestamp& clientTimestamp,
 		const Physics::Timestep& timestep, int playerId, const Physics::PlayerInput& playerInput)
 	{
+		if (!m_playerManager.isPlayerIdValid(playerId))
+		{
+			return;
+		}
 		m_simulationBuffer.writeControlFrame(timestep, playerId, playerInput);
 				m_notification.setNotification(timestep, false);
 		m_udpCommunication.broadcastControlFrame(m_playerManager.getPlayers(),
