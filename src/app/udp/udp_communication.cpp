@@ -81,6 +81,10 @@ namespace App
 			[&clientTimestamp, &udpFrameType, &airplaneTypeName, &timestep, &playerId, &playerInput]
 			(std::vector<std::uint8_t> buffer, std::size_t receivedSize)
 			{
+				if (buffer.size() == 0)
+				{
+					return false;
+				}
 				if (buffer[0] == toUInt8(UDPFrameType::initReq))
 				{
 					udpFrameType = UDPFrameType::initReq;
