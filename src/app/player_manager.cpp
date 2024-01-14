@@ -101,7 +101,7 @@ namespace App
 	{
 		m_mutex.lock();
 
-		if (!m_players.at(playerId).keepAliveLock)
+		if (m_players.contains(playerId) && !m_players.at(playerId).keepAliveLock)
 		{
 			m_players.at(playerId).keepAliveLock = true;
 			static const Physics::Timestep timeout{5, 0};

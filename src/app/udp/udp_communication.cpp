@@ -81,7 +81,7 @@ namespace App
 			[&clientTimestamp, &udpFrameType, &airplaneTypeName, &timestep, &playerId, &playerInput]
 			(std::vector<std::uint8_t> buffer, std::size_t receivedSize)
 			{
-				if (buffer.size() == 0)
+				if (receivedSize == 0)
 				{
 					return false;
 				}
