@@ -7,6 +7,7 @@
 #include "physics/notification.hpp"
 #include "physics/simulation_buffer.hpp"
 #include "physics/simulation_clock.hpp"
+#include "physics/spawner.hpp"
 
 #include <unordered_map>
 
@@ -24,6 +25,7 @@ namespace App
 
 		Physics::SimulationClock m_simulationClock{};
 		Physics::SimulationBuffer m_simulationBuffer;
+		Physics::Spawner m_spawner;
 
 		Physics::Notification m_notification{m_simulationClock};
 		Physics::Timestep m_frameCutoff{};

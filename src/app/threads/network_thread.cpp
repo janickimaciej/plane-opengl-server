@@ -8,6 +8,7 @@
 #include "common/airplane_type_name.hpp"
 #include "common/config.hpp"
 #include "common/map_name.hpp"
+#include "common/terrains/maps/maps.hpp"
 #include "physics/airplane_definitions.hpp"
 #include "physics/notification.hpp"
 #include "physics/player_info.hpp"
@@ -34,6 +35,7 @@ namespace App
 		int networkThreadPort, int physicsThreadPort) :
 		m_exitSignal{exitSignal},
 		m_simulationBuffer{-1, mapName},
+		m_spawner{*Common::Terrains::maps[toSizeT(mapName)]},
 		m_udpCommunication{networkThreadPort, physicsThreadPort}
 	{ }
 
@@ -112,16 +114,6 @@ namespace App
 			playerId = m_playerManager.addNewPlayer(endpoint, timestep);
 			if (playerId)
 			{
-				Common::State state{};
-				
-				constexpr glm::vec3 initialPosition{15000, 550, 8500};
-				state.position = initialPosition;
-				const glm::quat initialOrientation =
-					glm::angleAxis(glm::radians(80.0f), glm::vec3{0, 1, 0});
-				state.orientation = initialOrientation;
-				state.velocity =
-					Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialVelocity;
-
 				Physics::PlayerInfo playerInfo
 				{
 					Physics::PlayerInput{},
@@ -129,7 +121,7 @@ namespace App
 					{
 						airplaneTypeName,
 						Physics::airplaneDefinitions[Common::toSizeT(airplaneTypeName)].initialHP,
-						state
+						m_spawner.spawn(airplaneTypeName)
 					}
 				};
 				m_simulationBuffer.writeInitFrame(timestep, *playerId, playerInfo);

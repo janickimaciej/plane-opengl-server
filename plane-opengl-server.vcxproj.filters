@@ -41,6 +41,7 @@
     <ClCompile Include="core\physics\collisions\collision_test.cpp" />
     <ClCompile Include="core\physics\simulation_buffer_element.cpp" />
     <ClCompile Include="core\common\terrains\value_noise.cpp" />
+    <ClCompile Include="core\physics\spawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app\command_line_argument.hpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="core\physics\collisions\collision_test.hpp" />
     <ClInclude Include="core\common\value_noise.hpp" />
     <ClInclude Include="core\common\terrains\value_noise.hpp" />
+    <ClInclude Include="core\physics\spawner.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
