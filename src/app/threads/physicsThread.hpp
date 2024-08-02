@@ -1,11 +1,11 @@
 #pragma once
 
-#include "app/exit_signal.hpp"
-#include "app/player_manager.hpp"
-#include "app/udp/udp_communication.hpp"
+#include "app/exitSignal.hpp"
+#include "app/playerManager.hpp"
+#include "app/udp/udpCommunication.hpp"
 #include "physics/notification.hpp"
-#include "physics/simulation_buffer.hpp"
-#include "physics/simulation_clock.hpp"
+#include "physics/simulationBuffer.hpp"
+#include "physics/simulationClock.hpp"
 #include "physics/timestep.hpp"
 
 #include <thread>

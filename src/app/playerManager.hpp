@@ -1,6 +1,6 @@
 #pragma once
 
-#include "app/player_data.hpp"
+#include "app/playerData.hpp"
 #include "common/config.hpp"
 #include "physics/timestep.hpp"
 

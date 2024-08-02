@@ -1,20 +1,20 @@
-#include "app/threads/network_thread.hpp"
+#include "app/threads/networkThread.hpp"
 
-#include "app/exit_code.hpp"
-#include "app/exit_signal.hpp"
-#include "app/threads/physics_thread.hpp"
-#include "app/udp/udp_communication.hpp"
-#include "app/udp/udp_frame_type.hpp"
-#include "common/airplane_type_name.hpp"
+#include "app/exitCode.hpp"
+#include "app/exitSignal.hpp"
+#include "app/threads/physicsThread.hpp"
+#include "app/udp/udpCommunication.hpp"
+#include "app/udp/udpFrameType.hpp"
+#include "common/airplaneTypeName.hpp"
 #include "common/config.hpp"
-#include "common/map_name.hpp"
+#include "common/mapName.hpp"
 #include "common/terrains/maps/maps.hpp"
-#include "physics/airplane_definitions.hpp"
+#include "physics/airplaneDefinitions.hpp"
 #include "physics/notification.hpp"
-#include "physics/player_info.hpp"
-#include "physics/player_input.hpp"
-#include "physics/simulation_buffer.hpp"
-#include "physics/simulation_clock.hpp"
+#include "physics/playerInfo.hpp"
+#include "physics/playerInput.hpp"
+#include "physics/simulationBuffer.hpp"
+#include "physics/simulationClock.hpp"
 #include "physics/timestamp.hpp"
 
 #include <asio/asio.hpp>
@@ -65,7 +65,7 @@ namespace App
 			bool received = m_udpCommunication.receiveInitReqOrControlFrame(endpoint,
 				clientTimestamp, udpFrameType, airplaneTypeName, timestep, playerId, playerInput);
 			
-			constexpr Physics::Timestep frameAgeCutoffOffset{0,
+			static constexpr Physics::Timestep frameAgeCutoffOffset{0,
 				static_cast<unsigned int>(Common::stepsPerSecond * 0.9f)};
 			Physics::Timestep frameAgeCutoff = m_simulationClock.getTime() - frameAgeCutoffOffset;
 			if (m_frameCutoff < frameAgeCutoff)

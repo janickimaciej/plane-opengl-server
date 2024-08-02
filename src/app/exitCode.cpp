@@ -1,4 +1,4 @@
-#include "app/exit_code.hpp"
+#include "app/exitCode.hpp"
 
 namespace App
 {

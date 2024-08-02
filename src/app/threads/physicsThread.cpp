@@ -1,13 +1,13 @@
-#include "app/threads/physics_thread.hpp"
+#include "app/threads/physicsThread.hpp"
 
-#include "app/exit_signal.hpp"
-#include "app/player_manager.hpp"
-#include "app/udp/udp_communication.hpp"
-#include "common/airplane_info.hpp"
+#include "app/exitSignal.hpp"
+#include "app/playerManager.hpp"
+#include "app/udp/udpCommunication.hpp"
+#include "common/airplaneInfo.hpp"
 #include "physics/notification.hpp"
-#include "physics/player_input.hpp"
-#include "physics/simulation_buffer.hpp"
-#include "physics/simulation_clock.hpp"
+#include "physics/playerInput.hpp"
+#include "physics/simulationBuffer.hpp"
+#include "physics/simulationClock.hpp"
 #include "physics/timestep.hpp"
 
 #include <thread>

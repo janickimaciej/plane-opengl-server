@@ -1,10 +1,10 @@
 #pragma once
 
-#include "app/player_data.hpp"
-#include "app/udp/udp_frame_type.hpp"
-#include "common/airplane_type_name.hpp"
-#include "physics/player_info.hpp"
-#include "physics/player_input.hpp"
+#include "app/playerData.hpp"
+#include "app/udp/udpFrameType.hpp"
+#include "common/airplaneTypeName.hpp"
+#include "physics/playerInfo.hpp"
+#include "physics/playerInput.hpp"
 #include "physics/timestamp.hpp"
 #include "physics/timestep.hpp"
 

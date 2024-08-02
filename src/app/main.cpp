@@ -1,8 +1,8 @@
-#include "app/command_line_argument.hpp"
-#include "app/exit_code.hpp"
-#include "app/exit_signal.hpp"
-#include "app/threads/network_thread.hpp"
-#include "common/map_name.hpp"
+#include "app/commandLineArgument.hpp"
+#include "app/exitCode.hpp"
+#include "app/exitSignal.hpp"
+#include "app/threads/networkThread.hpp"
+#include "common/mapName.hpp"
 
 #include <memory>
 #include <string>
@@ -51,8 +51,8 @@ namespace App
 		}
 		mapName = static_cast<Common::MapName>(mapNameIndex);
 		
-		constexpr int minPortValue = 0;
-		constexpr int maxPortValue = 1 << 16;
+		static constexpr int minPortValue = 0;
+		static constexpr int maxPortValue = 1 << 16;
 
 		networkThreadPort = std::stoi(argv[toSizeT(CommandLineArgument::networkThreadPort)]);
 		if (networkThreadPort < minPortValue || networkThreadPort >= maxPortValue)
